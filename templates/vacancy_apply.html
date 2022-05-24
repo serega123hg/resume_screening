@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <title>Служба поддержки</title>
+    <style>
+        form {
+           margin: 20px; 
+        }
+        .err {
+         margin: 20px; 
+        }
+        .tblock{
+            margin-top: 20px;
+        }
+        .hidthis{
+            display: none;
+        }
+        h2{
+            margin-left: 210px;
+        }
+        .select_class{
+            width: 350px;
+        }
+        .addforma{
+            margin-left: 210px;
+        }
+        </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+
+    <div class="err" >
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+    </div>
+
+    <div class="container">
+    {% for elem in vac %}
+        {% if "vacancy_name" in elem.keys() %}
+        <div class="title_name_vac">
+            <h4>Вакансия {{ elem["vacancy_name"] }}</h4>
+        </div>
+        {% endif %}
+        {% endfor %}
+        
+        {% for elem in vac %}
+        {% if "vacancy_text" in elem.keys() %}
+        <div class="title_text_vac">
+            <span>{{ elem["vacancy_text"] }}</span>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+ 
+        <form method="post" enctype="multipart/form-data">
+            <h3>Откликнуться на вакансию:</h3>
+        
+            <h5>Загрузить резюме (в форате docx или pdf)</h5>
+            <input type="file" name="resume_file">
+        <!-- <input type="file" name="desc_file"> -->
+            <input type="submit" class="btn btn-primary" value="Загрузить">
+        </form>
+        {% if mes %}
+            <p>{{ mes }}</p>
+        {% endif %}
+    </div>
+</head>
+<body>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    
+    <title>Здесь вы можете проверить свое резюме на соответствие вакансии, а также отправить его HRу</title>
+    <style>
+       form {
+          margin: 20px; 
+       }
+       .err {
+        margin: 20px; 
+       }
+       .tblock{
+           margin-top: 20px;
+       }
+       .select_class{
+            width: 300px;
+        }
+        .no_vac{
+            font-size: 18px;
+            margin-top: 15px;
+        }
+        body{
+            padding: 30px;
+        }
+       </style>
+       <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+
+
+    <div class="container">
+
+        <h3>Активные вакансии</h3>
+
+        <div class="vac_container">
+
+            <div class="no_vac" >
+                {% if message %}
+                    <p>{{ message }}</p>
+                {% endif %}
+            </div>
+
+            {% for v in vac %}
+            <div class="vac_info">
+                {% for elem in v %}
+                    {% if elem["vacancy_name"] %}
+                        <div class="vacancy_name">
+                            {{ elem["vacancy_name"] }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                {% for elem in v %}
+                    {% if "vacancy_text_reduced" in elem.keys() %}
+                        <div class="vacancy_text"> 
+                            {{ elem["vacancy_text_reduced"] }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                {% for elem in v %}
+                    {% if "_id" in elem.keys() %}
+                        <div class="vacancy_link">
+                            <a href="{{ url_for('vacancy_apply.index4', vacancy_id=elem['_id']) }}">Откликнуться</a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if mes %}
+        <p>{{ mes }}</p>
+    {% endif %}
+
+    </div>
+</body>
+</html>
