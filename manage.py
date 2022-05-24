@@ -11,7 +11,7 @@ from Routes.vacancy import vacancy
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
-app.config["const uri"]  = "MONGODB_URI"
+uri = app.config["MONGODB_URI"]
 
 # папка для сохранения загруженных файлов
 UPLOAD_FOLDER = '/resumes'
