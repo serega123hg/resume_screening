@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    
+    <title>Кабинет HR</title>
+    <style>
+        .container {
+            padding-top: 30px;
+        }
+        input{
+            width: 600px;
+        }
+       form {
+          margin-top: 20px; 
+          margin-left: 0;
+          font-size: 18px;
+          margin-bottom: 40px;
+       }
+       .no_vac{
+            font-size: 18px;
+            margin-top: 15px;
+        }
+        div#loading {
+            width: 150px;
+            height: 100px;
+            display: none;
+            background: url(../static/img/loadingimage2.gif) center center;
+            cursor: wait;
+            margin: 0, auto;
+        }
+        .plt{
+            margin-left: 0;
+        }
+        .title_for_links{
+            font-size: 18px;
+        }
+       </style>
+       <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+
+
+    <div class="container">
+
+        <h3>Найдите подходящих кандидатов</h3>
+        <div id="content">
+        <form action="" method="post" enctype="multipart/form-data">
+            <p>
+                <label for="key_skills_file">Загрузите csv файл с нужными вам навыками</label>
+            </p>  
+            <p>  
+                <input type="file" name="key_skills">
+            </p>
+            <p>
+                <label for="resume_file">Выберите файлы с резюме (pdf или docx формата)</label>
+            </p>  
+            <p>  
+                <input type="file" name="resume_files[]" multiple>
+            </p>
+            <p>
+                <input type="submit" class="btn btn-primary" value="Анализ резюме" onclick="loading();">
+            </p>
+            </form>
+            
+            <form action="" method="post" enctype="multipart/form-data">
+                <p>
+                    <label for="vacancy_file">Загрузите csv файл с нужными вам навыками</label>
+                </p>  
+                <p>  
+                    <input type="file" name="key_skills">
+                </p>
+                <p>
+                    <label for="vacancy_text">Вставьте ссылку на страницу с резюме сайта HH.ru</label>
+                </p>  
+                <p>
+                    <input type="url" name="hh_link">
+                </p>
+                <p>
+                    <input type="submit" class="btn btn-primary" value="Анализ резюме" onclick="loading();">
+                </p>
+                </form>
+            </div>
+                <div id="loading">
+                    
+                </div>
+                {% if flag == 1 %}
+                    <div class="plt">
+
+                        <img src="../static/img/figure1.png" alt="" width="1200" height="450">
+                        
+                    </div>
+                {% endif %}
+                {% if flag == 2 %}
+                    <div class="plt">
+
+                        <img src="../static/img/figure2.png" alt="" width="1200" height="450">
+                        <div class="title_for_links">
+                            Ссылки на проанализированных кандидатов:
+                        </div>
+                        {% for elem in links_for_hr %}
+                        <div class="link_hr">
+                            <span>{{ elem }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+        
+        <div class="no_vac" >
+            {% if message %}
+                <p>{{ message }}</p>
+            {% endif %}
+        </div>
+
+        <script type="text/javascript">// <![CDATA[
+            function loading(){
+                $("#loading").show();
+                $("#content").hide();       
+            }
+    // ]]></script>
+    
+</body>
+</html>

@@ -6,9 +6,9 @@ import os
 import pymongo
 from flask import send_from_directory
 
-connect_string = 'mongodb+srv://sergey:MXL8whWLH264W5y@cluster0.icpry.mongodb.net/?retryWrites=true&w=majority'
-client = pymongo.MongoClient(connect_string)
-#client = pymongo.MongoClient("mongodb://localhost:27017/")
+#connect_string = ''
+#client = pymongo.MongoClient(connect_string)
+client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client["rec_data"]
 my_collection = db["rec_data"]
 
@@ -17,21 +17,10 @@ soiscatel = Blueprint('soiscatel', __name__,
                 template_folder='templates',
                 static_folder='static')
 
-# @soiscatel_result.route('/soiscatel/uploads/<name>')
-# def download_file(name):
-#     return send_from_directory(app.config["UPLOAD_FOLDER"], name)
-
 
 
 @soiscatel.route('/soiscatel', methods=['POST', 'GET'])
 def check_resume():
-    # if request.method == 'POST':
-    #     if (request.form.get('vacancy_name')):
-    #         rec_vacancy_name = request.form.get('vacancy_name')
-    #     if (request.form.get('vacancy_text')):
-    #         rec_vacancy_text = request.form.get('vacancy_text')
-
-    #     redirect(url_for('login', vacancy_id =  ))
 
     vac = []
     for vacancy in my_collection.find({"rec_type": "vac"}):

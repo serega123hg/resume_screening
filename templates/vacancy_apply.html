@@ -4,10 +4,11 @@
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
-    <title>Служба поддержки</title>
+    <title>Просмотр вакансии</title>
     <style>
         form {
-           margin: 20px; 
+           margin-top: 30px;
+           margin-bottom: 40px;
         }
         .err {
          margin: 20px; 
@@ -26,6 +27,16 @@
         }
         .addforma{
             margin-left: 210px;
+        }
+        .title_name_vac{
+            margin-top: 40px;
+        }
+        .title_text_vac{
+            max-width: 650px;
+            white-space: pre-line;
+        }
+        h5{
+            margin-bottom: 20px;
         }
         </style>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -49,9 +60,10 @@
         
         {% for elem in vac %}
         {% if "vacancy_text" in elem.keys() %}
-        <div class="title_text_vac">
+
+        <pre class="title_text_vac">
             <span>{{ elem["vacancy_text"] }}</span>
-        </div>
+        </pre>
         {% endif %}
         {% endfor %}
 
@@ -59,10 +71,10 @@
         <form method="post" enctype="multipart/form-data">
             <h3>Откликнуться на вакансию:</h3>
         
-            <h5>Загрузить резюме (в форате docx или pdf)</h5>
+            <h5>Загрузите резюме (в формате docx или pdf)</h5>
             <input type="file" name="resume_file">
         <!-- <input type="file" name="desc_file"> -->
-            <input type="submit" class="btn btn-primary" value="Загрузить">
+            <input type="submit" class="btn btn-primary" value="Отправить отклик">
         </form>
         {% if mes %}
             <p>{{ mes }}</p>

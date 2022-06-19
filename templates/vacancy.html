@@ -7,20 +7,6 @@
     
     <title>Просмотр вакансии</title>
     <style>
-       /* form {
-          margin: 20px; 
-          margin-left: 0;
-       }
-       .err {
-        margin: 20px; 
-       }
-       .tblock{
-           margin-top: 20px;
-       }
-       .select_class{
-            width: 350px;
-            margin-bottom: 20px;
-        } */
         .container {
             padding-top: 30px;
             padding-left: 30px;
@@ -54,6 +40,7 @@
         }
         .title_text_vac{
             margin-bottom: 30px;
+            max-width: 800px;
         }
         .inviz{
             display: none;
@@ -62,6 +49,9 @@
         .flash.success {
                 border: 1px solid #21DB56;
                 background: #AEFFC5;
+        }
+        pre{
+            white-space: pre-line;
         }
        </style>
        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -83,7 +73,7 @@
         {% for elem in vac %}
         {% if "vacancy_text" in elem.keys() %}
         <div class="title_text_vac">
-            <span>{{ elem["vacancy_text"] }}</span>
+            <pre>{{ elem["vacancy_text"] }}</pre>
         </div>
         {% endif %}
         {% endfor %}
@@ -161,6 +151,13 @@
                 {% if "SKILLS" in elem.keys() %}
                 <div class="skills">
                     Навыки: {{ elem["SKILLS"] }}
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% for elem in s %}
+                {% if "full_text" in elem.keys() %}
+                <div class="full_text_link">
+                    <a href="#">Полный текст резюме</a>
                 </div>
                 {% endif %}
                 {% endfor %}

@@ -7,9 +7,7 @@ import docx2txt
 import pymongo
 from pprint import pprint
 
-connect_string = 'mongodb+srv://sergey:MXL8whWLH264W5y@cluster0.icpry.mongodb.net/?retryWrites=true&w=majority'
-client = pymongo.MongoClient(connect_string)
-#client = pymongo.MongoClient("mongodb://localhost:27017/")
+client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client["rec_data"]
 my_collection = db["rec_data"]
 
@@ -23,16 +21,11 @@ def index5():
 
     vac = []
     for vacancy in my_collection.find({"rec_type":"vac"}):
-        #post
         temp = []
-        #if post["NAME"]:
-            #temp.append(post)
-            #temp.append({"NAME" : post["NAME"]})
         for elem in vacancy:
             temp.append({elem:vacancy[elem]})
 
         vac.append(temp)
-   # print(vac)
 
     for vacancy in vac:
         for elem in vacancy:
@@ -71,92 +64,3 @@ def index5():
 
 
     return render_template('hr.html',vac = vac)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # soiscatels = []
-    # for post in my_collection.find():
-    #     #post
-    #     temp = []
-    #     #if post["NAME"]:
-    #         #temp.append(post)
-    #         #temp.append({"NAME" : post["NAME"]})
-    #     for elem in post:
-    #         temp.append({elem:post[elem]})
-
-    #     soiscatels.append(temp)
-
-    # stroka = ""
-    # stroka1 = ""
-    # for s in soiscatels:
-    #     for item in s:
-
-    #         if "SKILLS" in item.keys():
-    #             temp = item["SKILLS"]
-    #             for elem in temp:
-    #                 stroka1 += elem + ", "
-    #             stroka1 = stroka1[:-1]
-    #             stroka1 = stroka1[:-1]
-    #             item["SKILLS"] = stroka1
-    #             stroka1 = ""
-
-    #         if "EDUCATION" in item.keys():
-    #             temp = item["EDUCATION"]
-    #             for elem in temp:
-    #                 if len(elem) == 2:
-    #                     stroka += elem[0].title() + " " + elem[1] + "г, "
-    #                 else: 
-    #                     stroka += elem[0].title() + ", "
-    #             stroka = stroka[:-1]
-    #             stroka = stroka[:-1]
-    #             item["EDUCATION"] = stroka
-    #             stroka = ""
-
-    #     try:
-    #         soiscatels = soiscatels.sort(key=operator.itemgetter('match_score'))
-    #     except:
-    #         pass
-    #     # for s in soiscatels:
-    #     #     s["contacts"] = s["name"] + "\n" + s["email"] + "\n" + s["phone"] 
-    #     #     s["geo"] = s["city"] + "\n" + s["cond"] 
-    #     #     #soiscatels["contacts"] = soiscatels["name"] + "\n" + soiscatels["email"] + "\n" + soiscatels["phone"] 
-    #     #     temp = s["skills"]
-    #     #     s["skills"] = ""
-    #     #     for item in temp:
-    #     #         s["skills"] += item[1] + "\n"
-    #     # for s in soiscatels:
-    #     #     s["contacts"] = s["NAME"] + "\n" + s["EMAIL"] + "\n" + s["PHONE"] 
-    #     #     #s["geo"] = s["city"] + "\n" + s["cond"] 
-    #     #     #soiscatels["contacts"] = soiscatels["name"] + "\n" + soiscatels["email"] + "\n" + soiscatels["phone"] 
-    #     #     temp = s["SKILLS"]
-    #     #     s["SKILLS"] = ""
-    #     #     for item in temp:
-    #     #         s["SKILLS"] += item[1] + "\n"
-    
-    # #print(soiscatels)    
-    
-        
-    # return render_template('/hr.html', soiscatels = soiscatels)
-
-            #return render_template('client.html', cards=crds, flag = 1, Name = Name1, Last_Name = Last_Name1, Rating = result12, plans=plans, mes = 'Такси заказано')
-    #return render_template('hr.html')
-    
